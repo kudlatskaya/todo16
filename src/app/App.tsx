@@ -2,7 +2,7 @@ import React, {useEffect} from 'react'
 import './App.css'
 import {TodolistsList} from '../features/TodolistsList/TodolistsList'
 import {useAppDispatch, useAppSelector} from './store'
-import {initializeAppTC, RequestStatusType} from './app-reducer'
+import {RequestStatusType} from './app-reducer'
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
@@ -14,6 +14,7 @@ import {Menu} from '@mui/icons-material';
 import {ErrorSnackbar} from '../components/ErrorSnackbar/ErrorSnackbar'
 import {Route, Routes, Navigate} from "react-router-dom";
 import {Login} from "../features/Login/Login";
+import {meTC} from "../features/Login/authReducer";
 
 
 function App() {
@@ -21,8 +22,8 @@ function App() {
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        dispatch(initializeAppTC())
-    })
+        dispatch(meTC())
+    },[])
 
     return (
         <div className="App">
@@ -45,7 +46,7 @@ function App() {
                     <Route path='/login' element={<Login/>}/>
                     <Route path='/404' element={<h1>404: PAGE NOT FOUND</h1>}/>
                     <Route path='*' element={<Navigate to='/404'/>}/>
-                </Routes>Ю
+                </Routes>
             </Container>
         </div>
     )

@@ -45,14 +45,12 @@ export const Login = () => {
             return errors
         },
         onSubmit: values => {
-            dispatch(loginTC({email: values.email, password: values.password, rememberMe: values.rememberMe, captcha: null}))
+            dispatch(loginTC(values))
             formik.resetForm()
         },
     })
 
-    if(isLoggedIn) {
-        // return <Navigate to={'/'}/>
-    }
+    if(isLoggedIn)  return <Navigate to={'/'}/>
 
     return <Grid container justifyContent={'center'}>
         <Grid item justifyContent={'center'}>
@@ -73,7 +71,8 @@ export const Login = () => {
                                    label="Email"
                                    margin="normal"
                                    {...formik.getFieldProps('email')}
-                                   onBlur={formik.handleBlur}/>
+                                   // onBlur={formik.handleBlur}
+                            />
                         {formik.touched.email && formik.errors.email ?
                             <div style={{color: 'red'}}>{formik.errors.email}</div> : null}
                         <TextField type="password"
